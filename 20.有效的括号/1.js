@@ -1,35 +1,32 @@
 /**
  * @param {string} s
  * @return {boolean}
+ * @date 2020-03-25 22:20:06
  */
-var isValid = function (s, isClearEmptyChar = false) {
-    let str = s,
-        strArr = str;
-    if (isClearEmptyChar === false) {
-        str = str.replace(' ', '')
-        strArr = str.split('')
-    }
-    let obj = {
+var isValid = function (s) {
+    let matchObj = {
         "(": ")",
         "[": "]",
         "{": "}",
+        ")": "(",
+        "]": "[",
+        "}": "{"
     },
-        isPass = true;
-    if (strArr.length === 0) {
-        return isPass;
-    } else {
-        for (let i = 0; i < strArr.length; i++) {
-            let findAnothIdx = strArr.indexOf(obj[strArr[i]])
-            if (findAnothIdx % 2 !== 0 && findAnothIdx !== -1) {
-                strArr.splice(i, 1);
-                strArr.splice(findAnothIdx - 1, 1)
-                return isValid(strArr, true)
-            }
-            else {
-                isPass = false;
-                return isPass;
+        firstChar = s[0],
+        isPass = false,
+        stackArr = [];
+    if (firstChar !== ')' || firstChar !== ']' || firstChar !== '}') {
+        for (let i = 0, l = s.length; i < l; i++) {
+            if (stackArr.indexOf(matchObj[s[i]]) === -1) {
+                stackArr.push(s[i])
+            } else {
+                stackArr.pop();
             }
         }
-    }
-};
-console.log(isValid("(([]){})"))    //此例未通过
+        isPass = stackArr.length > 0 ? false : true;
+    };
+    return isPass;
+}
+
+// 执行用时 :136 ms, 在所有 JavaScript 提交中击败了5.03%的用户
+// 内存消耗 :34 MB, 在所有 JavaScript 提交中击败了81.95%的用户
