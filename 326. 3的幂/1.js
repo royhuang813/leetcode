@@ -1,3 +1,4 @@
+// 【循环】
 /**
  * @param {number} n
  * @return {boolean}
