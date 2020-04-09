@@ -1,6 +1,8 @@
+// 【双指针】
 /**
  * @param {string} s
  * @return {string}
+ * @date 2020-04-09 14:27:44
  */
 var reverseVowels = function (s) {
     const set = new Set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
